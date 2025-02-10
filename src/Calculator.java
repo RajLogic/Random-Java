@@ -39,21 +39,23 @@ public class Calculator {
 
     // Separate method for calculations
     public static double calculate(double num1, double num2, char operator) {
-        switch (operator) {
-            case '+': return num1 + num2;
-            case '-': return num1 - num2;
-            case '*': return num1 * num2;
-            case '/':
+        return switch (operator) {
+            case '+' -> num1 + num2;
+            case '-' -> num1 - num2;
+            case '*' -> num1 * num2;
+            case '/' -> {
                 if (num2 == 0) {
                     System.out.println("Error! Division by zero.");
-                    return Double.NaN; // Return Not-a-Number
+                    yield Double.NaN;
                 }
-                return num1 / num2;
-            case '%': return num1 % num2;
-            case '^': return Math.pow(num1, num2);
-            default:
+                yield num1 / num2;
+            }
+            case '%' -> num1 % num2;
+            case '^' -> Math.pow(num1, num2);
+            default -> {
                 System.out.println("Invalid operator!");
-                return Double.NaN;
-        }
+                yield Double.NaN;
+            }
+        };
     }
 }
